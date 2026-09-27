@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PixelEase — Simple Image Tools</title>
+<meta name="description" content="PixelEase is a browser-based image toolkit for resizing, compressing, editing and converting images." />
+<meta property="og:title" content="PixelEase — Simple Image Tools" />
+<meta property="og:description" content="PixelEase is a browser-based image toolkit for resizing, compressing, editing and converting images." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%234F63D2%22/><circle cx=%2235%22 cy=%2240%22 r=%2212%22 fill=%22white%22/><path d=%22M15 78 L40 50 L58 68 L72 54 L88 78 Z%22 fill=%22white%22/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========================================================= -->
+<!-- SKIP LINK / ACCESSIBILITY                                  -->
+<!-- ========================================================= -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ========================================================= -->
+<!-- NAVBAR                                                     -->
+<!-- ========================================================= -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <a href="#home" class="brand" aria-label="PixelEase home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><rect width="24" height="24" rx="6" fill="currentColor" opacity="0.15"/><circle cx="9" cy="9.5" r="2.6" fill="currentColor"/><path d="M4 18.5 9.5 12l4 4.3 3.2-3.5 5.3 5.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">PixelEase</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home" class="nav-link" data-nav="home">Home</a>
+      <a href="#tools" class="nav-link" data-nav="tools">Tools</a>
+      <a href="#about" class="nav-link" data-nav="about">About</a>
+    </nav>
+
+    <div class="navbar-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#home" class="mobile-link" data-nav="home">Home</a>
+    <a href="#tools" class="mobile-link" data-nav="tools">Tools</a>
+    <a href="#about" class="mobile-link" data-nav="about">About</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========================================================= -->
+  <!-- HERO                                                       -->
+  <!-- ========================================================= -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <h1 class="hero-title">Simple image tools for everyone.</h1>
+      <p class="hero-subtitle">Resize, compress, edit and convert images directly in your browser.</p>
+      <p class="hero-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Your images are processed locally in your browser. They are not uploaded to our servers.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- UPLOAD SECTION (Empty state)                               -->
+  <!-- ========================================================= -->
+  <section class="upload-section" id="uploadSection">
+    <div class="upload-card" id="uploadCard">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image by dragging and dropping, or activate to choose a file">
+        <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp" hidden aria-label="Choose an image file" />
+        <div class="dropzone-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4 7 9M12 4l5 5"/><path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></svg>
+        </div>
+        <p class="dropzone-title">Drop your image here</p>
+        <p class="dropzone-sub">or choose a file</p>
+        <button class="btn btn-primary" id="chooseFileBtn" type="button">Choose Image</button>
+        <p class="dropzone-formats">Supports JPG, PNG and WEBP</p>
+      </div>
+      <p class="upload-error" id="uploadError" role="alert" hidden></p>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- PROCESSING OVERLAY                                         -->
+  <!-- ========================================================= -->
+  <div class="processing-overlay" id="processingOverlay" hidden aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <p id="processingLabel">Processing image…</p>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- EDITOR WORKSPACE                                           -->
+  <!-- ========================================================= -->
+  <section class="editor" id="editorSection" hidden>
+
+    <!-- Editor top bar -->
+    <div class="editor-topbar">
+      <div class="editor-file-info">
+        <span class="upload-success-badge" id="uploadSuccessBadge" hidden>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Image uploaded
+        </span>
+        <span class="file-name" id="editorFileName">image.jpg</span>
+        <span class="file-meta" id="editorFileMeta">0 × 0 px · 0 KB</span>
+      </div>
+      <div class="editor-toolbar" role="toolbar" aria-label="Editor actions">
+        <button class="tbtn" id="undoBtn" type="button" title="Undo" aria-label="Undo" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg>
+        </button>
+        <button class="tbtn" id="redoBtn" type="button" title="Redo" aria-label="Redo" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>
+        </button>
+        <button class="tbtn" id="resetBtn" type="button" title="Reset to original" aria-label="Reset to original">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        </button>
+        <button class="tbtn tbtn-compare" id="compareBtn" type="button" title="Press and hold to compare with original" aria-label="Compare with original">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-2 4 2 4M19 8l2 4-2 4"/></svg>
+          <span class="tbtn-label">Compare</span>
+        </button>
+        <button class="btn btn-secondary" id="newImageBtn" type="button">New Image</button>
+      </div>
+    </div>
+
+    <div class="editor-body">
+
+      <!-- LEFT: Tool navigation -->
+      <nav class="tool-nav" id="toolNav" aria-label="Image tools">
+        <div class="tool-search-wrap">
+          <svg class="tool-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="toolSearch" class="tool-search" placeholder="Search tools…" aria-label="Search tools">
+        </div>
+
+        <div class="tool-recent" id="toolRecent" hidden>
+          <p class="tool-group-label">Recently used</p>
+          <div class="tool-recent-list" id="toolRecentList"></div>
+        </div>
+
+        <p class="tool-group-label">All tools</p>
+        <div class="tool-list" id="toolList"><!-- populated by JS --></div>
+      </nav>
+
+      <!-- CENTER: Preview -->
+      <div class="preview-area">
+        <div class="preview-canvas-wrap">
+          <canvas id="mainCanvas" class="main-canvas"></canvas>
+          <div class="crop-overlay" id="cropOverlay" hidden>
+            <div class="crop-box" id="cropBox">
+              <div class="crop-handle" data-handle="nw"></div>
+              <div class="crop-handle" data-handle="ne"></div>
+              <div class="crop-handle" data-handle="sw"></div>
+              <div class="crop-handle" data-handle="se"></div>
+            </div>
+          </div>
+          <span class="compare-badge" id="compareBadge" hidden>Original</span>
+        </div>
+        <div class="preview-stats" id="previewStats">0 × 0 px · JPEG · 0 KB</div>
+      </div>
+
+      <!-- RIGHT: Tool panel -->
+      <aside class="tool-panel" id="toolPanel" aria-live="polite">
+        <div class="tool-panel-empty" id="toolPanelEmpty">
+          <p>Select a tool on the left to get started.</p>
+        </div>
+        <!-- Tool panels injected by JS -->
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- TOOLS OVERVIEW (marketing section, id="tools")             -->
+  <!-- ========================================================= -->
+  <section class="tools-overview" id="tools">
+    <h2 class="section-title">Everything you need, in one place</h2>
+    <p class="section-subtitle" id="toolsCountSubtitle">Browser-based tools for resizing, compressing, editing and converting your images — most with live preview.</p>
+    <div class="category-chips" id="toolsGridFilters"><!-- populated by JS --></div>
+    <div class="tools-grid" id="toolsGrid"><!-- populated by JS --></div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- ABOUT                                                      -->
+  <!-- ========================================================= -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <h2 class="section-title">About PixelEase</h2>
+      <p>PixelEase is a lightweight browser-based image toolkit designed to make everyday image tasks simple. Resize, compress, crop, convert, edit and optimize images without installing complicated software.</p>
+      <p>PixelEase processes images directly in your browser using web technologies such as the Canvas API. Images are not uploaded to a PixelEase server for processing.</p>
+      <div class="about-grid">
+        <div class="about-item">
+          <h3>Private by design</h3>
+          <p>Your image processing happens in your browser. PixelEase does not upload your images to a server for image processing.</p>
+        </div>
+        <div class="about-item">
+          <h3>No installation required</h3>
+          <p>PixelEase works directly in modern desktop and mobile browsers.</p>
+        </div>
+        <div class="about-item">
+          <h3>Built for everyday tasks</h3>
+          <p>From reducing an image to a specific file size to preparing signatures, documents and social-media images, PixelEase brings common image utilities together in one place.</p>
+        </div>
+      </div>
+
+      <div class="creator-block">
+        <h3 class="creator-heading">Built by Hardik</h3>
+        <p>I'm Hardik, a BCA student interested in software development, automation and cybersecurity. I built PixelEase to make common image-processing tasks faster and easier for everyday users.</p>
+
+        <h4 class="projects-heading">My Projects</h4>
+        <div class="projects-grid">
+          <a class="project-card" href="#" data-project="h-24">
+            <h5>H-24</h5>
+            <p>Cybersecurity, automation and utility tools.</p>
+            <span class="project-link">Visit project →</span>
+          </a>
+          <a class="project-card" href="#" data-project="h-24-blog">
+            <h5>H-24 Blog</h5>
+            <p>A full-stack blogging and community platform.</p>
+            <span class="project-link">Visit project →</span>
+          </a>
+        </div>
+        <p class="project-note">Project links are placeholders until the live URLs are added.</p>
+      </div>
+
+      <div class="feedback-block" id="feedback">
+        <h3 class="creator-heading">Help improve PixelEase</h3>
+        <p>Have an idea for a new tool or found something that isn't working correctly? I'd love to hear from you.</p>
+        <div class="feedback-actions">
+          <a class="btn btn-primary" href="mailto:hardikprajapati242008@gmail.com?subject=PixelEase%20-%20Tool%20Suggestion&amp;body=Hello%20Hardik%2C%0A%0AI%20would%20like%20to%20suggest%20a%20new%20tool%20for%20PixelEase.%0A%0ASuggested%20tool%3A%0A%5BWrite%20your%20suggestion%20here%5D%0A%0AWhy%20would%20this%20be%20useful%3F%0A%5BWrite%20here%5D%0A%0AThank%20you.">Suggest a Tool</a>
+          <a class="btn btn-secondary" href="mailto:hardikprajapati242008@gmail.com?subject=PixelEase%20-%20Bug%20Report&amp;body=Hello%20Hardik%2C%0A%0AI%20found%20an%20issue%20in%20PixelEase.%0A%0AIssue%3A%0A%5BDescribe%20the%20issue%5D%0A%0ASteps%20to%20reproduce%3A%0A%5BWrite%20steps%20here%5D%0A%0ABrowser%2Fdevice%3A%0A%5BWrite%20here%5D%0A%0AThank%20you.">Report an Issue</a>
+        </div>
+        <a class="feedback-general" href="mailto:hardikprajapati242008@gmail.com?subject=PixelEase%20-%20Feedback&amp;body=Hello%20Hardik%2C%0A%0AI%20have%20some%20feedback%20about%20PixelEase.%0A%0A%5BWrite%20your%20feedback%20here%5D%0A%0AThank%20you.">Or send general feedback</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">PixelEase</span>
+      <p>Simple image tools for everyone.</p>
+      <p class="footer-credit">Built by Hardik</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="#" data-project="h-24">H-24</a>
+      <a href="#" data-project="h-24-blog">H-24 Blog</a>
+      <a href="mailto:hardikprajapati242008@gmail.com?subject=PixelEase%20-%20Tool%20Suggestion&amp;body=Hello%20Hardik%2C%0A%0AI%20would%20like%20to%20suggest%20a%20new%20tool%20for%20PixelEase.%0A%0ASuggested%20tool%3A%0A%5BWrite%20your%20suggestion%20here%5D%0A%0AWhy%20would%20this%20be%20useful%3F%0A%5BWrite%20here%5D%0A%0AThank%20you.">Suggest a Tool</a>
+      <a href="mailto:hardikprajapati242008@gmail.com?subject=PixelEase%20-%20Bug%20Report&amp;body=Hello%20Hardik%2C%0A%0AI%20found%20an%20issue%20in%20PixelEase.%0A%0AIssue%3A%0A%5BDescribe%20the%20issue%5D%0A%0ASteps%20to%20reproduce%3A%0A%5BWrite%20steps%20here%5D%0A%0ABrowser%2Fdevice%3A%0A%5BWrite%20here%5D%0A%0AThank%20you.">Report an Issue</a>
+    </nav>
+  </div>
+  <p class="footer-note">Images are processed in your browser.</p>
+</footer>
+
+<!-- ========================================================= -->
+<!-- TOAST CONTAINER                                            -->
+<!-- ========================================================= -->
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ========================================================= -->
+<!-- TEMPLATES for tool panels (cloned by JS)                   -->
+<!-- ========================================================= -->
+<template id="tpl-field-row">
+  <div class="field-row"></div>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>
